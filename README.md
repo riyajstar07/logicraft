@@ -4,6 +4,8 @@ Fleet tracking, warehouse inventory, shipment control, and public-transit schedu
 
 Built by [Riya Jaiswal](https://riyajaiswal.com).
 
+Live console: https://logicraft-sigma.vercel.app
+
 ## What you can do
 
 - Assign drivers, schedule maintenance, and send a vehicle to the workshop.
