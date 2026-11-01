@@ -4,7 +4,9 @@ Fleet tracking, warehouse inventory, shipment control, and public-transit schedu
 
 Built by [Riya Jaiswal](https://riyajaiswal.com).
 
-Live console: https://logicraft-sigma.vercel.app
+Live site: https://logicraft-sigma.vercel.app
+
+Sign in with `riyajstar07@gmail.com` / `logicraft`, or create an account. Each login keeps its own network in Vercel Blob.
 
 ## What you can do
 

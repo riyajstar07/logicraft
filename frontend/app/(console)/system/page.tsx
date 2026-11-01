@@ -38,13 +38,10 @@ export default function SystemPage() {
       </div>
       <div className="card mt-4 p-5 text-sm leading-6">
         <p>
-          The live console keeps the network in this browser, so reserving stock, advancing a shipment, and issuing a ticket all stay available on the deployed site. The FastAPI service in <span className="font-mono">backend/</span> stores the same document in SQLite and exposes it at <span className="font-mono">/api</span> and <span className="font-mono">/docs</span>.
+          Each signed-in account keeps its own network in Vercel Blob. The FastAPI service in <span className="font-mono">backend/</span> applies the same rules to SQLite when you run it locally, at <span className="font-mono">/docs</span>.
         </p>
         <p className="mt-3">
           Domain logic sits in <span className="font-mono">backend/app/domain.py</span>. The end-to-end test walks a shipment from an oversell rejection through delivery, then books and cancels a seat.
-        </p>
-        <p className="mt-3 text-mute">
-          Built by Riya Jaiswal · <a className="underline" href="https://riyajaiswal.com">riyajaiswal.com</a> · riyajstar07@gmail.com
         </p>
         <ResetDemo />
       </div>

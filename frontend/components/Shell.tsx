@@ -4,11 +4,12 @@ import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useMemo, useState } from "react"
 import { Bus, LayoutDashboard, Network, Package, Search, Ticket, Truck, Warehouse } from "lucide-react"
+import { SiteFooter } from "@/components/SiteFooter"
 import { useStore } from "@/lib/store"
 import { cx } from "@/lib/format"
 
 const NAV = [
-  { href: "/", label: "Overview", icon: LayoutDashboard },
+  { href: "/overview", label: "Overview", icon: LayoutDashboard },
   { href: "/fleet", label: "Fleet", icon: Truck },
   { href: "/warehouses", label: "Warehouses", icon: Warehouse },
   { href: "/shipments", label: "Shipments", icon: Package },
@@ -18,14 +19,13 @@ const NAV = [
 ]
 
 function active(pathname: string, href: string) {
-  if (href === "/") return pathname === "/"
   return pathname === href || pathname.startsWith(`${href}/`)
 }
 
 export function Shell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
-  const { state, ready, reset } = useStore()
+  const { state, user, ready, reset } = useStore()
   const [query, setQuery] = useState("")
   const [open, setOpen] = useState(false)
 
@@ -70,7 +70,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen md:grid md:grid-cols-[232px_1fr]">
       <aside className="hidden bg-side text-[#ece8df] md:flex md:min-h-screen md:flex-col md:justify-between md:px-4 md:py-5">
         <div>
-          <Link href="/" className="flex items-center gap-2.5 px-2">
+          <Link href="/overview" className="flex items-center gap-2.5 px-2">
             <Mark />
             <span className="font-serif text-xl tracking-tight">LogiCraft</span>
           </Link>
@@ -95,24 +95,24 @@ export function Shell({ children }: { children: React.ReactNode }) {
           </nav>
         </div>
         <div className="px-2 text-xs leading-5 text-[#a39e92]">
-          <p className="text-[#ece8df]">Riya Jaiswal</p>
-          <a className="hover:text-white" href="https://riyajaiswal.com">
-            riyajaiswal.com
-          </a>
+          <p className="truncate text-[#ece8df]">{user?.email ?? "Signed in"}</p>
           <button
             className="mt-3 block text-left text-[#c9c4b8] underline-offset-4 hover:underline"
             onClick={() => {
-              if (window.confirm("Reset the demo back to this morning's network?")) reset()
+              if (window.confirm("Reset this account back to this morning's network?")) reset()
             }}
           >
             Reset demo data
           </button>
+          <button className="mt-2 block text-left text-[#c9c4b8] underline-offset-4 hover:underline" onClick={() => signOut()}>
+            Sign out
+          </button>
         </div>
       </aside>
-      <div>
+      <div className="flex min-h-screen flex-col">
         <header className="sticky top-0 z-30 border-b border-line bg-[#f3f1ea]/90 backdrop-blur">
           <div className="flex items-center gap-3 px-4 py-3 md:px-8">
-            <Link href="/" className="flex items-center gap-2 md:hidden">
+            <Link href="/overview" className="flex items-center gap-2 md:hidden">
               <Mark />
               <span className="font-serif text-lg">LogiCraft</span>
             </Link>
@@ -148,6 +148,9 @@ export function Shell({ children }: { children: React.ReactNode }) {
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
               Network live
             </span>
+            <button className="btn-quiet md:hidden" onClick={() => signOut()}>
+              Sign out
+            </button>
           </div>
           <nav className="flex gap-2 overflow-x-auto px-4 pb-3 md:hidden">
             {NAV.map((item) => (
@@ -164,12 +167,18 @@ export function Shell({ children }: { children: React.ReactNode }) {
             ))}
           </nav>
         </header>
-        <main className="mx-auto w-full max-w-6xl px-4 py-6 md:px-8 md:py-8">
+        <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 md:px-8 md:py-8">
           {ready ? children : <p className="text-sm text-mute">Loading the network…</p>}
         </main>
+        <SiteFooter />
       </div>
     </div>
   )
+}
+
+async function signOut() {
+  await fetch("/api/auth/logout", { method: "POST" })
+  window.location.href = "/"
 }
 
 function Mark() {

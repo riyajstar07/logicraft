@@ -1,140 +1,60 @@
-"use client"
-
 import Link from "next/link"
-import { OpsMap, PageIntro, Pill, Stat } from "@/components/ui"
-import { labelize, num, when } from "@/lib/format"
-import { available, byId, jobTone, todayIso } from "@/lib/logic"
-import { useStore } from "@/lib/store"
+import { SiteFooter } from "@/components/SiteFooter"
 
-export default function OverviewPage() {
-  const { state } = useStore()
-  const today = todayIso()
-  const active = state.vehicles.filter((vehicle) => vehicle.status === "en-route" || vehicle.status === "loading")
-  const open = state.shipments.filter((shipment) => !["delivered", "cancelled"].includes(shipment.status))
-  const delayed = open.filter((shipment) => shipment.delayed)
-  const low = state.stock.filter((row) => available(row) <= row.reorderAt)
-  const overdue = state.maintenance.filter((job) => jobTone(job.status, job.dueDate, today) === "overdue")
-  const tickets = state.tickets.filter((ticket) => ticket.status === "confirmed")
-  const feed = state.shipments
-    .flatMap((shipment) =>
-      shipment.events.map((event) => ({
-        at: event.at,
-        title: `${shipment.reference} · ${event.label}`,
-        detail: event.detail,
-        href: `/shipments/${shipment.id}`,
-      })),
-    )
-    .sort((a, b) => (a.at < b.at ? 1 : -1))
-    .slice(0, 6)
+const MODULES = [
+  { name: "Fleet", text: "Vehicles, drivers, assignments, and the workshop." },
+  { name: "Warehouses", text: "On-hand, reserved, and available stock across three yards." },
+  { name: "Shipments", text: "Reserve stock, assign a truck, and close the delivery." },
+  { name: "Transit", text: "Coach schedules, a seat map, and digital tickets." },
+]
 
-  const points = [
-    ...state.warehouses.map((warehouse) => ({
-      id: warehouse.id,
-      lat: warehouse.lat,
-      lng: warehouse.lng,
-      label: warehouse.code,
-      tone: "warehouse" as const,
-    })),
-    ...state.vehicles
-      .filter((vehicle) => vehicle.kind !== "coach")
-      .map((vehicle) => ({
-        id: vehicle.id,
-        lat: vehicle.lat,
-        lng: vehicle.lng,
-        label: vehicle.city,
-        tone: vehicle.status === "maintenance" ? ("warn" as const) : ("accent" as const),
-      })),
-  ]
-
+export default function HomePage() {
   return (
-    <div>
-      <PageIntro
-        kicker="Mumbai · Delhi · Bengaluru"
-        title="The network this afternoon"
-        text="Freight, stock, and city coaches on one board. Counts below follow whatever you reserve, move, or book in this session."
-      />
-      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <Stat label="Moving now" value={active.length} hint={`${state.vehicles.length} vehicles on the books`} />
-        <Stat label="Open shipments" value={open.length} hint={delayed.length ? `${delayed.length} running late` : "None delayed"} />
-        <Stat label="Low stock lines" value={low.length} hint="At or under reorder" />
-        <Stat label="Live tickets" value={tickets.length} hint={`${overdue.length} service jobs overdue`} />
-      </div>
-      <div className="mt-4 grid gap-4 lg:grid-cols-5">
-        <div className="card p-3 lg:col-span-3">
-          <div className="mb-3 flex items-center justify-between px-1">
-            <p className="text-sm font-medium">Linehaul</p>
-            <p className="text-xs text-mute">Yards and freight vehicles</p>
-          </div>
-          <OpsMap points={points} />
+    <div className="flex min-h-screen flex-col">
+      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-5 md:px-8">
+        <div className="flex items-center gap-2.5">
+          <Logo />
+          <span className="font-serif text-xl tracking-tight">LogiCraft</span>
         </div>
-        <div className="card lg:col-span-2">
-          <p className="border-b border-line px-4 py-3 text-sm font-medium">Latest movement</p>
-          <ul>
-            {feed.map((item) => (
-              <li key={item.title + item.at} className="border-b border-line px-4 py-3 last:border-b-0">
-                <Link href={item.href} className="text-sm font-medium hover:underline">
-                  {item.title}
-                </Link>
-                <p className="mt-1 text-sm text-mute">{item.detail}</p>
-                <p className="mt-1 text-xs text-mute">{when(item.at)}</p>
-              </li>
-            ))}
-          </ul>
+        <Link href="/login" className="btn">
+          Sign in
+        </Link>
+      </header>
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 pb-16 pt-8 md:px-8 md:pt-16">
+        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-mute">Mumbai · Delhi · Bengaluru · Pune</p>
+        <h1 className="mt-3 max-w-3xl font-serif text-5xl leading-[1.05] tracking-tight md:text-6xl">
+          Freight, yards, and city coaches on one board.
+        </h1>
+        <p className="mt-5 max-w-xl text-base leading-7 text-mute">
+          LogiCraft runs fleet tracking, warehouse stock, shipment control, and public-transport ticketing as one operations console.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link href="/login" className="btn-accent">
+            Open the console
+          </Link>
+          <a href="https://riyajaiswal.com" className="btn-ghost">
+            Riya Jaiswal
+          </a>
         </div>
-      </div>
-      <div className="mt-4 grid gap-4 lg:grid-cols-2">
-        <div className="card">
-          <div className="flex items-center justify-between border-b border-line px-4 py-3">
-            <p className="text-sm font-medium">Reorder now</p>
-            <Link href="/warehouses" className="text-sm text-mute hover:text-ink">
-              Warehouses
-            </Link>
-          </div>
-          <ul>
-            {low.map((row) => {
-              const sku = byId(state.skus, row.skuId)
-              const warehouse = byId(state.warehouses, row.warehouseId)
-              return (
-                <li key={row.warehouseId + row.skuId} className="flex items-center justify-between border-b border-line px-4 py-3 last:border-b-0">
-                  <div>
-                    <p className="text-sm font-medium">{sku?.name}</p>
-                    <p className="text-sm text-mute">{warehouse?.name}</p>
-                  </div>
-                  <p className="text-sm">
-                    {num(available(row))} {sku?.unit}
-                    <span className="text-mute"> / {row.reorderAt}</span>
-                  </p>
-                </li>
-              )
-            })}
-          </ul>
+        <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {MODULES.map((item) => (
+            <article key={item.name} className="card p-5">
+              <h2 className="font-serif text-2xl">{item.name}</h2>
+              <p className="mt-2 text-sm leading-6 text-mute">{item.text}</p>
+            </article>
+          ))}
         </div>
-        <div className="card">
-          <div className="flex items-center justify-between border-b border-line px-4 py-3">
-            <p className="text-sm font-medium">Workshop</p>
-            <Link href="/fleet" className="text-sm text-mute hover:text-ink">
-              Fleet
-            </Link>
-          </div>
-          <ul>
-            {state.maintenance
-              .filter((job) => job.status !== "done")
-              .map((job) => {
-                const vehicle = byId(state.vehicles, job.vehicleId)
-                const tone = jobTone(job.status, job.dueDate, today)
-                return (
-                  <li key={job.id} className="flex items-center justify-between gap-3 border-b border-line px-4 py-3 last:border-b-0">
-                    <div>
-                      <p className="text-sm font-medium">{job.type}</p>
-                      <p className="font-mono text-xs text-mute">{vehicle?.plate}</p>
-                    </div>
-                    <Pill value={tone}>{tone === "overdue" ? "Overdue" : labelize(tone)}</Pill>
-                  </li>
-                )
-              })}
-          </ul>
-        </div>
-      </div>
+      </main>
+      <SiteFooter />
     </div>
+  )
+}
+
+function Logo() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+      <rect width="22" height="22" rx="6" fill="#0f6e56" />
+      <path d="M4.5 15.5h13M6 15.5V8.5l5 3.6 5-3.6v7" fill="none" stroke="white" strokeWidth="1.4" />
+    </svg>
   )
 }

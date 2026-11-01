@@ -100,15 +100,36 @@ function boundsOf(points: MapPoint[]) {
   return { minLat: minLat - padLat, maxLat: maxLat + padLat, minLng: minLng - padLng, maxLng: maxLng + padLng }
 }
 
-function place(point: MapPoint, bounds: ReturnType<typeof boundsOf>) {
+function project(point: MapPoint, bounds: ReturnType<typeof boundsOf>) {
   const x = ((point.lng - bounds.minLng) / (bounds.maxLng - bounds.minLng)) * 100
   const y = ((bounds.maxLat - point.lat) / (bounds.maxLat - bounds.minLat)) * 100
-  return { left: `${Math.min(94, Math.max(6, x))}%`, top: `${Math.min(90, Math.max(8, y))}%` }
+  return {
+    x: Math.min(92, Math.max(8, x)),
+    y: Math.min(88, Math.max(12, y)),
+  }
+}
+
+function rank(tone: MapPoint["tone"]) {
+  if (tone === "warehouse") return 0
+  if (tone === "warn") return 1
+  if (tone === "ink") return 2
+  return 3
 }
 
 export function OpsMap({ points, className }: { points: MapPoint[]; className?: string }) {
   if (!points.length) return null
   const bounds = boundsOf(points)
+  const placed = points.map((point) => ({ point, ...project(point, bounds), showLabel: false }))
+  const accepted: { x: number; y: number }[] = []
+  const ordered = [...placed].sort((a, b) => rank(a.point.tone) - rank(b.point.tone))
+  for (const item of ordered) {
+    if (!item.point.label) continue
+    const crowded = accepted.some((spot) => Math.hypot(spot.x - item.x, spot.y - item.y) < 16)
+    if (!crowded) {
+      item.showLabel = true
+      accepted.push({ x: item.x, y: item.y })
+    }
+  }
   return (
     <div className={cx("relative min-h-[320px] overflow-hidden rounded-2xl bg-[#e4eee8]", className)}>
       <div
@@ -120,19 +141,31 @@ export function OpsMap({ points, className }: { points: MapPoint[]; className?: 
         }}
       />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,255,255,0.75),transparent_42%)]" />
-      {points.map((point) => (
-        <div key={point.id} className="absolute -translate-x-1/2 -translate-y-1/2" style={place(point, bounds)}>
+      {placed.map((item) => (
+        <div
+          key={item.point.id}
+          className="absolute -translate-x-1/2 -translate-y-1/2"
+          style={{ left: `${item.x}%`, top: `${item.y}%` }}
+          title={item.point.label}
+        >
           <span
             className={cx(
-              "block rounded-full ring-4",
-              point.tone === "warehouse" && "h-2.5 w-2.5 rounded-sm bg-ink ring-ink/10",
-              point.tone === "warn" && "h-3 w-3 bg-rose-600 ring-rose-600/20",
-              point.tone === "ink" && "h-3 w-3 bg-ink ring-white/70",
-              (!point.tone || point.tone === "accent") && "h-3 w-3 bg-accent ring-accent/20",
+              "mx-auto block ring-2 ring-white",
+              item.point.tone === "warehouse" && "h-2.5 w-2.5 rounded-[3px] bg-ink",
+              item.point.tone === "warn" && "h-2.5 w-2.5 rounded-full bg-rose-600",
+              item.point.tone === "ink" && "h-2.5 w-2.5 rounded-full bg-ink",
+              (!item.point.tone || item.point.tone === "accent") && "h-2.5 w-2.5 rounded-full bg-accent",
             )}
           />
-          {point.label ? (
-            <span className="mt-1 block max-w-16 truncate text-[11px] font-medium text-ink/80">{point.label}</span>
+          {item.showLabel ? (
+            <span
+              className={cx(
+                "absolute top-1/2 z-10 -translate-y-1/2 whitespace-nowrap rounded-full bg-white/95 px-1.5 py-0.5 text-[11px] font-medium text-ink shadow-sm",
+                item.x < 45 ? "right-4" : "left-4",
+              )}
+            >
+              {item.point.label}
+            </span>
           ) : null}
         </div>
       ))}

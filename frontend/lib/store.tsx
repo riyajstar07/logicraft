@@ -19,12 +19,14 @@ import {
 } from "./logic"
 import type { ShipmentInput, State, TicketInput } from "./types"
 
-const KEY = "logicraft-state-v1"
 const seedState = seed as State
+
+type Account = { email: string; name: string }
 
 type Store = {
   ready: boolean
   state: State
+  user: Account | null
   reset: () => void
   assignDriver: (vehicleId: string, driverId: string | null) => string | null
   scheduleMaintenance: (vehicleId: string, type: string, dueDate: string, notes: string) => string | null
@@ -42,44 +44,63 @@ type Store = {
 
 const Ctx = createContext<Store | null>(null)
 
-function storedState() {
-  try {
-    const raw = localStorage.getItem(KEY)
-    if (!raw) return null
-    const parsed = JSON.parse(raw) as { version?: number; state?: State }
-    if (parsed.version === 1 && parsed.state?.vehicles && parsed.state.shipments && parsed.state.tickets) {
-      return parsed.state
-    }
-  } catch {
-    return null
-  }
-  return null
-}
-
 export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<State>(() => clone(seedState))
+  const [user, setUser] = useState<Account | null>(null)
   const [ready, setReady] = useState(false)
+  const [problem, setProblem] = useState<string | null>(null)
 
   useEffect(() => {
-    const saved = storedState()
-    if (saved) setState(saved)
-    setReady(true)
+    let cancelled = false
+    fetch("/api/network")
+      .then(async (response) => {
+        if (response.status === 401) {
+          window.location.href = "/login"
+          return
+        }
+        const body = (await response.json().catch(() => null)) as { state?: State; user?: Account; error?: string } | null
+        if (!response.ok || !body?.state) {
+          if (!cancelled) setProblem(body?.error ?? "The network could not be loaded")
+          return
+        }
+        if (cancelled) return
+        setState(body.state)
+        setUser(body.user ?? null)
+        setReady(true)
+      })
+      .catch(() => {
+        if (!cancelled) setProblem("The network could not be loaded")
+      })
+    return () => {
+      cancelled = true
+    }
   }, [])
 
-  useEffect(() => {
-    if (!ready) return
-    localStorage.setItem(KEY, JSON.stringify({ version: 1, state }))
-  }, [ready, state])
+  const persist = (next: State) => {
+    void fetch("/api/network", {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ state: next }),
+    })
+  }
 
   const apply = (result: { state: State; error: string | null }) => {
-    if (!result.error) setState(result.state)
+    if (!result.error) {
+      setState(result.state)
+      persist(result.state)
+    }
     return result.error
   }
 
   const value: Store = {
     ready,
     state,
-    reset: () => setState(clone(seedState)),
+    user,
+    reset: () => {
+      const fresh = clone(seedState)
+      setState(fresh)
+      void fetch("/api/network/reset", { method: "POST" })
+    },
     assignDriver: (vehicleId, driverId) => apply(assignDriver(state, vehicleId, driverId)),
     scheduleMaintenance: (vehicleId, type, dueDate, notes) =>
       apply(scheduleMaintenance(state, vehicleId, type, dueDate, notes)),
@@ -104,7 +125,11 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     cancelTicket: (code) => apply(cancelTicket(state, code)),
   }
 
-  return <Ctx.Provider value={value}>{children}</Ctx.Provider>
+  return (
+    <Ctx.Provider value={value}>
+      {problem ? <p className="p-8 text-sm text-rose-700">{problem}</p> : children}
+    </Ctx.Provider>
+  )
 }
 
 export function useStore() {
