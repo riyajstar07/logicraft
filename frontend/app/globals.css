@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background: #f3f1ea;
+  color: #1c1b19;
+}
+
+::selection {
+  background: #d7efe6;
+}
+
+.card {
+  @apply rounded-2xl border border-line bg-panel;
+}
+
+.field {
+  @apply w-full rounded-xl border border-line bg-white px-3 py-2 text-sm outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink px-4 py-2 text-sm font-medium text-white transition hover:bg-black disabled:cursor-not-allowed disabled:opacity-40;
+}
+
+.btn-accent {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-medium text-white transition hover:bg-[#0c5b48] disabled:cursor-not-allowed disabled:opacity-40;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-line bg-white px-4 py-2 text-sm font-medium transition hover:bg-[#faf8f3] disabled:cursor-not-allowed disabled:opacity-40;
+}
+
+.btn-quiet {
+  @apply inline-flex items-center justify-center rounded-full px-3 py-1.5 text-sm font-medium text-ink underline-offset-4 hover:underline disabled:opacity-40;
+}
+
+table th {
+  @apply whitespace-nowrap px-4 py-3 text-left text-[11px] font-medium uppercase tracking-[0.14em] text-mute;
+}
+
+table td {
+  @apply px-4 py-3 align-middle;
+}
+
+@media print {
+  aside,
+  header,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+  main {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+}

@@ -1,0 +1,338 @@
+{
+  "drivers": [
+    {"id": "DR-01", "name": "Ayaan Sheikh", "phone": "+91 98200 11420", "license": "MH1420260001122", "status": "on-duty", "rating": 4.8, "hoursToday": 6.5, "hub": "Mumbai"},
+    {"id": "DR-02", "name": "Neha Kulkarni", "phone": "+91 97654 22018", "license": "MH1220260008841", "status": "on-duty", "rating": 4.7, "hoursToday": 5.0, "hub": "Pune"},
+    {"id": "DR-03", "name": "Rohan Iyer", "phone": "+91 98450 33190", "license": "KA0320260002291", "status": "on-duty", "rating": 4.9, "hoursToday": 7.0, "hub": "Bengaluru"},
+    {"id": "DR-04", "name": "Imran Qureshi", "phone": "+91 98111 48220", "license": "DL0120260007712", "status": "on-duty", "rating": 4.6, "hoursToday": 4.5, "hub": "Delhi"},
+    {"id": "DR-05", "name": "Sana Pathan", "phone": "+91 99201 77834", "license": "MH0420260006510", "status": "on-duty", "rating": 4.8, "hoursToday": 3.5, "hub": "Mumbai"},
+    {"id": "DR-06", "name": "Kabir Mehta", "phone": "+91 90000 21446", "license": "TS0920260001184", "status": "leave", "rating": 4.5, "hoursToday": 0, "hub": "Hyderabad"},
+    {"id": "DR-07", "name": "Meera Joshi", "phone": "+91 98205 66219", "license": "MH0120260009033", "status": "on-duty", "rating": 4.9, "hoursToday": 6.0, "hub": "Mumbai"},
+    {"id": "DR-08", "name": "Farhan Ali", "phone": "+91 98711 30552", "license": "DL0120260004418", "status": "on-duty", "rating": 4.7, "hoursToday": 5.5, "hub": "Delhi"},
+    {"id": "DR-09", "name": "Arjun Rao", "phone": "+91 98860 19440", "license": "KA0520260007720", "status": "on-duty", "rating": 4.6, "hoursToday": 2.0, "hub": "Bengaluru"},
+    {"id": "DR-10", "name": "Divya Nair", "phone": "+91 94440 12885", "license": "TN0720260003301", "status": "off-duty", "rating": 4.8, "hoursToday": 0, "hub": "Chennai"},
+    {"id": "DR-11", "name": "Kavya Deshmukh", "phone": "+91 97630 44128", "license": "MH1220260002284", "status": "on-duty", "rating": 4.7, "hoursToday": 4.0, "hub": "Pune"}
+  ],
+  "vehicles": [
+    {"id": "VH-01", "plate": "MH04 AB 2187", "kind": "truck", "make": "Tata Signa 4018", "capacityKg": 16000, "seats": null, "fuelPct": 62, "odometerKm": 184420, "status": "en-route", "driverId": "DR-01", "lat": 18.748, "lng": 73.407, "city": "Lonavala", "heading": "Pune", "updatedAt": "2026-11-01T15:12:00+05:30"},
+    {"id": "VH-02", "plate": "MH12 CD 9044", "kind": "van", "make": "Ashok Leyland Dost", "capacityKg": 1500, "seats": null, "fuelPct": 78, "odometerKm": 64210, "status": "loading", "driverId": "DR-05", "lat": 19.281, "lng": 73.063, "city": "Bhiwandi", "heading": "Dock 3", "updatedAt": "2026-11-01T15:28:00+05:30"},
+    {"id": "VH-03", "plate": "KA03 EF 4410", "kind": "reefer", "make": "Eicher Pro 3015", "capacityKg": 9000, "seats": null, "fuelPct": 54, "odometerKm": 120884, "status": "en-route", "driverId": "DR-03", "lat": 12.985, "lng": 77.728, "city": "Whitefield", "heading": "Chennai", "updatedAt": "2026-11-01T15:21:00+05:30"},
+    {"id": "VH-04", "plate": "DL01 GH 7721", "kind": "truck", "make": "BharatBenz 1917", "capacityKg": 12000, "seats": null, "fuelPct": 81, "odometerKm": 98012, "status": "idle", "driverId": "DR-04", "lat": 28.704, "lng": 77.17, "city": "Delhi", "heading": "Azadpur yard", "updatedAt": "2026-11-01T14:55:00+05:30"},
+    {"id": "VH-05", "plate": "TS09 JK 3308", "kind": "van", "make": "Tata Ace Gold", "capacityKg": 1000, "seats": null, "fuelPct": 22, "odometerKm": 141330, "status": "maintenance", "driverId": null, "lat": 17.44, "lng": 78.498, "city": "Hyderabad", "heading": "Workshop", "updatedAt": "2026-11-01T09:05:00+05:30"},
+    {"id": "VH-06", "plate": "MH14 LM 1182", "kind": "truck", "make": "Mahindra Blazo", "capacityKg": 14000, "seats": null, "fuelPct": 70, "odometerKm": 76440, "status": "idle", "driverId": "DR-02", "lat": 18.591, "lng": 73.738, "city": "Pune", "heading": "Yard", "updatedAt": "2026-11-01T13:40:00+05:30"},
+    {"id": "VH-07", "plate": "MH01 BT 2201", "kind": "coach", "make": "Ashok Leyland", "capacityKg": 0, "seats": 40, "fuelPct": 66, "odometerKm": 220145, "status": "en-route", "driverId": "DR-07", "lat": 19.14, "lng": 72.848, "city": "Mumbai", "heading": "Borivali", "updatedAt": "2026-11-01T15:32:00+05:30"},
+    {"id": "VH-08", "plate": "DL01 BT 7780", "kind": "coach", "make": "Tata Marcopolo", "capacityKg": 0, "seats": 40, "fuelPct": 58, "odometerKm": 188920, "status": "en-route", "driverId": "DR-08", "lat": 28.651, "lng": 77.19, "city": "Delhi", "heading": "Janakpuri", "updatedAt": "2026-11-01T15:30:00+05:30"},
+    {"id": "VH-09", "plate": "KA05 BT 9090", "kind": "coach", "make": "Eicher Skyline", "capacityKg": 0, "seats": 40, "fuelPct": 84, "odometerKm": 95440, "status": "idle", "driverId": "DR-09", "lat": 12.969, "lng": 77.75, "city": "Bengaluru", "heading": "Whitefield depot", "updatedAt": "2026-11-01T15:05:00+05:30"},
+    {"id": "VH-10", "plate": "MH12 BT 4419", "kind": "coach", "make": "Ashok Leyland", "capacityKg": 0, "seats": 40, "fuelPct": 61, "odometerKm": 133280, "status": "en-route", "driverId": "DR-11", "lat": 18.559, "lng": 73.786, "city": "Pune", "heading": "Swargate", "updatedAt": "2026-11-01T15:33:00+05:30"}
+  ],
+  "maintenance": [
+    {"id": "MN-01", "vehicleId": "VH-05", "type": "Brake inspection", "dueDate": "2026-10-28", "status": "scheduled", "notes": "Pull to one side under load. Hold the van until the liners are replaced.", "workshop": "Hyderabad Central"},
+    {"id": "MN-02", "vehicleId": "VH-01", "type": "Oil service", "dueDate": "2026-11-06", "status": "scheduled", "notes": "Due at 185,000 km.", "workshop": "Bhiwandi yard"},
+    {"id": "MN-03", "vehicleId": "VH-04", "type": "Tyre rotation", "dueDate": "2026-10-20", "status": "done", "notes": "Completed on the night shift.", "workshop": "Azadpur yard"},
+    {"id": "MN-04", "vehicleId": "VH-03", "type": "Reefer unit check", "dueDate": "2026-11-03", "status": "scheduled", "notes": "Confirm 2–8°C before the next pharma lane.", "workshop": "Whitefield FC"}
+  ],
+  "warehouses": [
+    {"id": "WH-MUM", "name": "Bhiwandi DC", "code": "MUM", "city": "Mumbai", "address": "Building 4, Kasheli, Bhiwandi", "lat": 19.281, "lng": 73.048, "capacityUnits": 800, "manager": "Pooja Sharma"},
+    {"id": "WH-DEL", "name": "Azadpur Hub", "code": "DEL", "city": "Delhi", "address": "Block C, Azadpur Mandi, Delhi", "lat": 28.707, "lng": 77.174, "capacityUnits": 500, "manager": "Harpreet Singh"},
+    {"id": "WH-BLR", "name": "Whitefield FC", "code": "BLR", "city": "Bengaluru", "address": "Plot 18, EPIP Zone, Whitefield", "lat": 12.969, "lng": 77.75, "capacityUnits": 400, "manager": "Nandita Rao"}
+  ],
+  "skus": [
+    {"id": "SKU-ELC", "name": "Consumer electronics", "unit": "case", "category": "Electronics"},
+    {"id": "SKU-TXT", "name": "Apparel bales", "unit": "bale", "category": "Apparel"},
+    {"id": "SKU-FOD", "name": "Packaged foods", "unit": "case", "category": "Grocery"},
+    {"id": "SKU-PHR", "name": "Cold-chain pharma", "unit": "carton", "category": "Healthcare"},
+    {"id": "SKU-AUT", "name": "Spare parts", "unit": "crate", "category": "Industrial"},
+    {"id": "SKU-HOM", "name": "Home & kitchen", "unit": "carton", "category": "Home"},
+    {"id": "SKU-BEV", "name": "Beverages", "unit": "crate", "category": "Grocery"},
+    {"id": "SKU-PKG", "name": "Packaging material", "unit": "bundle", "category": "Packaging"}
+  ],
+  "stock": [
+    {"warehouseId": "WH-MUM", "skuId": "SKU-ELC", "onHand": 120, "reserved": 20, "reorderAt": 30},
+    {"warehouseId": "WH-MUM", "skuId": "SKU-TXT", "onHand": 80, "reserved": 0, "reorderAt": 20},
+    {"warehouseId": "WH-MUM", "skuId": "SKU-FOD", "onHand": 40, "reserved": 10, "reorderAt": 25},
+    {"warehouseId": "WH-MUM", "skuId": "SKU-HOM", "onHand": 64, "reserved": 0, "reorderAt": 15},
+    {"warehouseId": "WH-MUM", "skuId": "SKU-PKG", "onHand": 200, "reserved": 0, "reorderAt": 40},
+    {"warehouseId": "WH-MUM", "skuId": "SKU-BEV", "onHand": 18, "reserved": 12, "reorderAt": 20},
+    {"warehouseId": "WH-DEL", "skuId": "SKU-AUT", "onHand": 90, "reserved": 16, "reorderAt": 20},
+    {"warehouseId": "WH-DEL", "skuId": "SKU-FOD", "onHand": 70, "reserved": 0, "reorderAt": 25},
+    {"warehouseId": "WH-DEL", "skuId": "SKU-HOM", "onHand": 22, "reserved": 8, "reorderAt": 20},
+    {"warehouseId": "WH-DEL", "skuId": "SKU-ELC", "onHand": 15, "reserved": 0, "reorderAt": 20},
+    {"warehouseId": "WH-DEL", "skuId": "SKU-PKG", "onHand": 140, "reserved": 0, "reorderAt": 40},
+    {"warehouseId": "WH-BLR", "skuId": "SKU-ELC", "onHand": 48, "reserved": 12, "reorderAt": 20},
+    {"warehouseId": "WH-BLR", "skuId": "SKU-PHR", "onHand": 36, "reserved": 8, "reorderAt": 30},
+    {"warehouseId": "WH-BLR", "skuId": "SKU-TXT", "onHand": 54, "reserved": 0, "reorderAt": 15},
+    {"warehouseId": "WH-BLR", "skuId": "SKU-HOM", "onHand": 28, "reserved": 0, "reorderAt": 15},
+    {"warehouseId": "WH-BLR", "skuId": "SKU-BEV", "onHand": 60, "reserved": 0, "reorderAt": 20}
+  ],
+  "movements": [
+    {"id": "MV-01", "at": "2026-11-01T08:12:00+05:30", "warehouseId": "WH-MUM", "skuId": "SKU-ELC", "delta": 40, "reason": "Inbound ASN 9921 from Navi Mumbai"},
+    {"id": "MV-02", "at": "2026-11-01T07:40:00+05:30", "warehouseId": "WH-BLR", "skuId": "SKU-PHR", "delta": 24, "reason": "Cold-room receipt, lot PH-19"},
+    {"id": "MV-03", "at": "2026-10-31T18:20:00+05:30", "warehouseId": "WH-MUM", "skuId": "SKU-TXT", "delta": -14, "reason": "Shipment LC-18411 delivered"},
+    {"id": "MV-04", "at": "2026-11-01T09:05:00+05:30", "warehouseId": "WH-DEL", "skuId": "SKU-AUT", "delta": 30, "reason": "Inbound from Gurugram vendor"}
+  ],
+  "shipments": [
+    {
+      "id": "SH-18420",
+      "reference": "LC-18420",
+      "customer": "Northwind Retail",
+      "originId": "WH-MUM",
+      "destinationCity": "Pune",
+      "destinationAddress": "Koregaon Park receiving, Pune",
+      "destLat": 18.5204,
+      "destLng": 73.8567,
+      "priority": "standard",
+      "delayed": true,
+      "status": "in-transit",
+      "lines": [{"skuId": "SKU-ELC", "qty": 20}],
+      "vehicleId": "VH-01",
+      "driverId": "DR-01",
+      "distanceKm": 128,
+      "eta": "2026-11-01T18:10:00+05:30",
+      "createdAt": "2026-11-01T06:40:00+05:30",
+      "events": [
+        {"at": "2026-11-01T06:40:00+05:30", "label": "Created", "detail": "Order opened for Northwind Retail"},
+        {"at": "2026-11-01T06:41:00+05:30", "label": "Stock reserved", "detail": "20 cases held at Bhiwandi DC"},
+        {"at": "2026-11-01T07:05:00+05:30", "label": "Vehicle assigned", "detail": "MH04 AB 2187 · Ayaan Sheikh"},
+        {"at": "2026-11-01T07:40:00+05:30", "label": "Picked up", "detail": "Left dock 2 at Bhiwandi"},
+        {"at": "2026-11-01T08:10:00+05:30", "label": "In transit", "detail": "NH48 toward Pune. Holding at Lonavala for ghat traffic."}
+      ]
+    },
+    {
+      "id": "SH-18433",
+      "reference": "LC-18433",
+      "customer": "Coastal Grocers",
+      "originId": "WH-MUM",
+      "destinationCity": "Surat",
+      "destinationAddress": "Ring Road DC, Surat",
+      "destLat": 21.1702,
+      "destLng": 72.8311,
+      "priority": "standard",
+      "delayed": false,
+      "status": "reserved",
+      "lines": [{"skuId": "SKU-FOD", "qty": 10}, {"skuId": "SKU-BEV", "qty": 12}],
+      "vehicleId": null,
+      "driverId": null,
+      "distanceKm": 248,
+      "eta": "2026-11-02T09:00:00+05:30",
+      "createdAt": "2026-11-01T13:40:00+05:30",
+      "events": [
+        {"at": "2026-11-01T13:40:00+05:30", "label": "Created", "detail": "Order opened for Coastal Grocers"},
+        {"at": "2026-11-01T13:40:00+05:30", "label": "Stock reserved", "detail": "Foods and beverages held at Bhiwandi DC"}
+      ]
+    },
+    {
+      "id": "SH-18422",
+      "reference": "LC-18422",
+      "customer": "Desert Motors",
+      "originId": "WH-DEL",
+      "destinationCity": "Jaipur",
+      "destinationAddress": "Sitapura industrial area, Jaipur",
+      "destLat": 26.9124,
+      "destLng": 75.7873,
+      "priority": "standard",
+      "delayed": false,
+      "status": "assigned",
+      "lines": [{"skuId": "SKU-AUT", "qty": 16}],
+      "vehicleId": "VH-04",
+      "driverId": "DR-04",
+      "distanceKm": 268,
+      "eta": "2026-11-01T22:30:00+05:30",
+      "createdAt": "2026-11-01T09:10:00+05:30",
+      "events": [
+        {"at": "2026-11-01T09:10:00+05:30", "label": "Created", "detail": "Order opened for Desert Motors"},
+        {"at": "2026-11-01T09:11:00+05:30", "label": "Stock reserved", "detail": "16 crates held at Azadpur Hub"},
+        {"at": "2026-11-01T11:20:00+05:30", "label": "Vehicle assigned", "detail": "DL01 GH 7721 · Imran Qureshi"}
+      ]
+    },
+    {
+      "id": "SH-18427",
+      "reference": "LC-18427",
+      "customer": "Ganga Home Co",
+      "originId": "WH-DEL",
+      "destinationCity": "Lucknow",
+      "destinationAddress": "Transport Nagar, Lucknow",
+      "destLat": 26.8467,
+      "destLng": 80.9462,
+      "priority": "standard",
+      "delayed": false,
+      "status": "reserved",
+      "lines": [{"skuId": "SKU-HOM", "qty": 8}],
+      "vehicleId": null,
+      "driverId": null,
+      "distanceKm": 510,
+      "eta": "2026-11-02T16:00:00+05:30",
+      "createdAt": "2026-11-01T10:15:00+05:30",
+      "events": [
+        {"at": "2026-11-01T10:15:00+05:30", "label": "Created", "detail": "Order opened for Ganga Home Co"},
+        {"at": "2026-11-01T10:15:00+05:30", "label": "Stock reserved", "detail": "8 cartons held at Azadpur Hub"}
+      ]
+    },
+    {
+      "id": "SH-18421",
+      "reference": "LC-18421",
+      "customer": "Deccan Digital",
+      "originId": "WH-BLR",
+      "destinationCity": "Hyderabad",
+      "destinationAddress": "Gachibowli goods gate, Hyderabad",
+      "destLat": 17.385,
+      "destLng": 78.4867,
+      "priority": "standard",
+      "delayed": false,
+      "status": "reserved",
+      "lines": [{"skuId": "SKU-ELC", "qty": 12}],
+      "vehicleId": null,
+      "driverId": null,
+      "distanceKm": 572,
+      "eta": "2026-11-02T12:30:00+05:30",
+      "createdAt": "2026-11-01T11:05:00+05:30",
+      "events": [
+        {"at": "2026-11-01T11:05:00+05:30", "label": "Created", "detail": "Order opened for Deccan Digital"},
+        {"at": "2026-11-01T11:05:00+05:30", "label": "Stock reserved", "detail": "12 cases held at Whitefield FC"}
+      ]
+    },
+    {
+      "id": "SH-18430",
+      "reference": "LC-18430",
+      "customer": "Bay Clinics",
+      "originId": "WH-BLR",
+      "destinationCity": "Chennai",
+      "destinationAddress": "Porur cold room, Chennai",
+      "destLat": 13.0827,
+      "destLng": 80.2707,
+      "priority": "express",
+      "delayed": false,
+      "status": "in-transit",
+      "lines": [{"skuId": "SKU-PHR", "qty": 8}],
+      "vehicleId": "VH-03",
+      "driverId": "DR-03",
+      "distanceKm": 346,
+      "eta": "2026-11-01T21:40:00+05:30",
+      "createdAt": "2026-11-01T07:20:00+05:30",
+      "events": [
+        {"at": "2026-11-01T07:20:00+05:30", "label": "Created", "detail": "Express order opened for Bay Clinics"},
+        {"at": "2026-11-01T07:21:00+05:30", "label": "Stock reserved", "detail": "8 cartons held in the cold room"},
+        {"at": "2026-11-01T08:00:00+05:30", "label": "Vehicle assigned", "detail": "KA03 EF 4410 · Rohan Iyer"},
+        {"at": "2026-11-01T08:30:00+05:30", "label": "Picked up", "detail": "Sealed at 4°C and signed out"},
+        {"at": "2026-11-01T09:05:00+05:30", "label": "In transit", "detail": "Reefer on NH48 toward Chennai"}
+      ]
+    },
+    {
+      "id": "SH-18411",
+      "reference": "LC-18411",
+      "customer": "Sahyadri Apparel",
+      "originId": "WH-MUM",
+      "destinationCity": "Nashik",
+      "destinationAddress": "Satpur MIDC, Nashik",
+      "destLat": 19.9975,
+      "destLng": 73.7898,
+      "priority": "standard",
+      "delayed": false,
+      "status": "delivered",
+      "lines": [{"skuId": "SKU-TXT", "qty": 14}],
+      "vehicleId": "VH-02",
+      "driverId": "DR-05",
+      "distanceKm": 165,
+      "eta": "2026-10-31T21:00:00+05:30",
+      "createdAt": "2026-10-31T12:10:00+05:30",
+      "events": [
+        {"at": "2026-10-31T12:10:00+05:30", "label": "Created", "detail": "Order opened for Sahyadri Apparel"},
+        {"at": "2026-10-31T12:12:00+05:30", "label": "Stock reserved", "detail": "14 bales held at Bhiwandi DC"},
+        {"at": "2026-10-31T14:00:00+05:30", "label": "Vehicle assigned", "detail": "MH12 CD 9044 · Sana Pathan"},
+        {"at": "2026-10-31T15:10:00+05:30", "label": "Picked up", "detail": "Left Bhiwandi"},
+        {"at": "2026-10-31T16:00:00+05:30", "label": "In transit", "detail": "NH160 toward Nashik"},
+        {"at": "2026-10-31T20:40:00+05:30", "label": "Delivered", "detail": "Signed by the Satpur gate"}
+      ]
+    },
+    {
+      "id": "SH-18408",
+      "reference": "LC-18408",
+      "customer": "Chandigarh Wholesale",
+      "originId": "WH-DEL",
+      "destinationCity": "Chandigarh",
+      "destinationAddress": "Industrial Area Phase 1, Chandigarh",
+      "destLat": 30.7333,
+      "destLng": 76.7794,
+      "priority": "standard",
+      "delayed": false,
+      "status": "cancelled",
+      "lines": [{"skuId": "SKU-FOD", "qty": 6}],
+      "vehicleId": null,
+      "driverId": null,
+      "distanceKm": 250,
+      "eta": "2026-11-01T18:00:00+05:30",
+      "createdAt": "2026-10-31T16:05:00+05:30",
+      "events": [
+        {"at": "2026-10-31T16:05:00+05:30", "label": "Created", "detail": "Order opened for Chandigarh Wholesale"},
+        {"at": "2026-10-31T16:06:00+05:30", "label": "Stock reserved", "detail": "6 cases held at Azadpur Hub"},
+        {"at": "2026-10-31T17:30:00+05:30", "label": "Cancelled", "detail": "Buyer withdrew the order. Reservation released."}
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "id": "RT-12",
+      "code": "12",
+      "name": "Western line",
+      "city": "Mumbai",
+      "fareInr": 40,
+      "stops": [
+        {"name": "Bandra", "lat": 19.055, "lng": 72.84},
+        {"name": "Andheri", "lat": 19.119, "lng": 72.846},
+        {"name": "Goregaon", "lat": 19.166, "lng": 72.852},
+        {"name": "Borivali", "lat": 19.229, "lng": 72.857}
+      ]
+    },
+    {
+      "id": "RT-41",
+      "code": "41",
+      "name": "Central ring",
+      "city": "Delhi",
+      "fareInr": 35,
+      "stops": [
+        {"name": "Connaught Place", "lat": 28.631, "lng": 77.216},
+        {"name": "Karol Bagh", "lat": 28.652, "lng": 77.19},
+        {"name": "Rajouri Garden", "lat": 28.642, "lng": 77.124},
+        {"name": "Janakpuri", "lat": 28.621, "lng": 77.088}
+      ]
+    },
+    {
+      "id": "RT-7",
+      "code": "7",
+      "name": "Whitefield corridor",
+      "city": "Bengaluru",
+      "fareInr": 45,
+      "stops": [
+        {"name": "Whitefield", "lat": 12.969, "lng": 77.75},
+        {"name": "Marathahalli", "lat": 12.956, "lng": 77.701},
+        {"name": "Indiranagar", "lat": 12.978, "lng": 77.641},
+        {"name": "Majestic", "lat": 12.976, "lng": 77.571}
+      ]
+    },
+    {
+      "id": "RT-19",
+      "code": "19",
+      "name": "Hinjewadi run",
+      "city": "Pune",
+      "fareInr": 30,
+      "stops": [
+        {"name": "Hinjewadi", "lat": 18.591, "lng": 73.739},
+        {"name": "Baner", "lat": 18.559, "lng": 73.787},
+        {"name": "Shivajinagar", "lat": 18.532, "lng": 73.847},
+        {"name": "Swargate", "lat": 18.502, "lng": 73.858}
+      ]
+    }
+  ],
+  "trips": [
+    {"id": "TR-12A", "routeId": "RT-12", "vehicleId": "VH-07", "driverId": "DR-07", "departTime": "14:40", "durationMin": 70},
+    {"id": "TR-41A", "routeId": "RT-41", "vehicleId": "VH-08", "driverId": "DR-08", "departTime": "15:05", "durationMin": 55},
+    {"id": "TR-19A", "routeId": "RT-19", "vehicleId": "VH-10", "driverId": "DR-11", "departTime": "15:20", "durationMin": 45},
+    {"id": "TR-07A", "routeId": "RT-7", "vehicleId": "VH-09", "driverId": "DR-09", "departTime": "16:20", "durationMin": 50},
+    {"id": "TR-07B", "routeId": "RT-7", "vehicleId": "VH-09", "driverId": "DR-09", "departTime": "18:40", "durationMin": 50}
+  ],
+  "tickets": [
+    {"code": "TK-4K91MQ", "tripId": "TR-12A", "passenger": "Rahul Desai", "phone": "+91 98200 44110", "fromStop": "Bandra", "toStop": "Goregaon", "seats": [2, 3], "fareInr": 53, "bookedAt": "2026-11-01T09:12:00+05:30", "status": "confirmed"},
+    {"code": "TK-7M20PA", "tripId": "TR-12A", "passenger": "Lekha Jain", "phone": "+91 98330 22910", "fromStop": "Andheri", "toStop": "Borivali", "seats": [14], "fareInr": 27, "bookedAt": "2026-11-01T10:02:00+05:30", "status": "confirmed"},
+    {"code": "TK-88C1LD", "tripId": "TR-41A", "passenger": "Anjali Gupta", "phone": "+91 98100 55281", "fromStop": "Connaught Place", "toStop": "Karol Bagh", "seats": [12], "fareInr": 12, "bookedAt": "2026-11-01T11:18:00+05:30", "status": "confirmed"},
+    {"code": "TK-Q19BB2", "tripId": "TR-07A", "passenger": "Priya Menon", "phone": "+91 98860 10024", "fromStop": "Whitefield", "toStop": "Indiranagar", "seats": [1, 5], "fareInr": 60, "bookedAt": "2026-11-01T12:44:00+05:30", "status": "confirmed"},
+    {"code": "TK-P55K10", "tripId": "TR-19A", "passenger": "Sameer Khan", "phone": "+91 97654 88012", "fromStop": "Hinjewadi", "toStop": "Shivajinagar", "seats": [8], "fareInr": 20, "bookedAt": "2026-11-01T13:05:00+05:30", "status": "confirmed"}
+  ]
+}

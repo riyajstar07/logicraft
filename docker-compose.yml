@@ -1,0 +1,14 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      LOGICRAFT_DB: /data/logicraft.db
+    volumes:
+      - api-data:/data
+
+volumes:
+  api-data:
